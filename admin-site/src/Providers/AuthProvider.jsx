@@ -7,10 +7,10 @@ export const AuhtProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const verifyToken = () => {
     instance.get("verify").then((response) => {
-      if (response.data === "Token Required")
-        return console.log("Why No Token!");
+      if (response.data === "Token Required") return console.log(response.data);
+      if (response.data === "Expired") return console.log("Token Expired");
       setUserData(response.data);
-      console.log(response.data);
+      console.log(`Logged in as ${response.data.username}`);
     });
   };
   useEffect(() => {

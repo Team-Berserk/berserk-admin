@@ -5,6 +5,7 @@ import { instance } from "../Clients";
 import { utils } from "@amir04lm26/react-modern-calendar-date-picker";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import Calendar from "react-calendar";
 
 const options = [
   { value: "644a501b83fa5beca3d465b3", label: "Энхжин" },
@@ -18,15 +19,14 @@ export const Dashboard = () => {
   const [users, setUsers] = useState(null);
   const [awagdsn, setAwagdsn] = useState(0);
   const [doc, setDoc] = useState(options[2].value);
-  const [docindex, setDocIndex] = useState(options[2].value);
+  // const [docindex, setDocIndex] = useState(options[2].value);
   const [udur, setDate] = useState(null);
-  const getDocsUsers = (date, doc) => {
-    instance.put("manage/" + doc, { date }).then((response) => {
-      console.log(doc, date);
-      console.log(Object.entries(response.data.placeholder));
+  const [calendarVisible, setVisibility] = useState(false);
+  const getDocsUsers = () => {
+    // console.log(doc, udur);
+    instance.put("manage/" + doc, { date: udur }).then((response) => {
       setUsers(Object.entries(response.data.placeholder));
       let num = 0;
-      console.log(date);
       Object.entries(response.data.placeholder).forEach((item) => {
         if (item[1]._id) {
           num++;
@@ -35,20 +35,20 @@ export const Dashboard = () => {
       setAwagdsn(num);
     });
   };
-
+  const handleChange = (value) => {
+    setDate(value.toLocaleDateString("pt-br").split("/").reverse().join("-"));
+  };
   useEffect(() => {
-    const day = utils().getToday();
-    const date = `${day.year}-${day.month < 10 ? "0" : ""}${day.month}-${
-      day.day < 10 ? "0" : ""
-    }${day.day}`;
-    setDate(date);
-    getDocsUsers(udur, doc);
+    setDate(
+      new Date().toLocaleDateString("pt-br").split("/").reverse().join("-")
+    );
+    getDocsUsers();
   }, []);
 
   useEffect(() => {
     setUsers(null);
-    getDocsUsers(udur, doc);
-    console.log(udur, doc);
+    getDocsUsers();
+    // console.log();
   }, [doc, udur]);
 
   return (
@@ -72,7 +72,7 @@ export const Dashboard = () => {
           </div>
         </div>
         <h1 className=" font-bold text-xl mt-16 text-center m-5">
-          Өнөөдрийн үйлчлүүлэгчид
+          {udur} үйлчлүүлэгчид
         </h1>
         <Dropdown
           options={options}
@@ -82,6 +82,18 @@ export const Dashboard = () => {
           value={options[2]}
           className="w-1/3 rounded-md"
         />
+        <button
+          className="border-[1px] border-solid border-gray-300 mt-2 p-2 mb-2"
+          onClick={() => setVisibility((prev) => !prev)}
+        >
+          Өдрөө сонгох
+        </button>
+        {calendarVisible && (
+          <Calendar
+            minDate={new Date()}
+            onChange={(value) => handleChange(value)}
+          />
+        )}
         <div className="h-[400px] bg-slate-200 mt-8 rounded-2xl pb-10">
           <div className="h-10 w-full flex align-middle  p-4 pt-2 pr-16">
             <p className="w-32">Нэр</p>
@@ -92,7 +104,14 @@ export const Dashboard = () => {
           </div>
           {users ? (
             users.map((user, index) => {
-              return <UserManager key={user._id} user={user} index={index} />;
+              return (
+                <UserManager
+                  key={user._id}
+                  user={user}
+                  func={getDocsUsers}
+                  index={index}
+                />
+              );
             })
           ) : (
             <div className="flex justify-center items-center h-full">
