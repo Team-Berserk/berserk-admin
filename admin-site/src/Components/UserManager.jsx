@@ -1,4 +1,3 @@
-import { set } from "mongoose";
 import { instance } from "../Clients";
 
 export const UserManager = ({ user, func }) => {
