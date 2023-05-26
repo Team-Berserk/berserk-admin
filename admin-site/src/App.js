@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Login } from "./Pages/Login";
 import { Dashboard } from "./Pages/AdminDashboard";
@@ -10,12 +10,12 @@ function App() {
   const { userData } = useContext(AuthContext);
   // console.log(userData);
   return (
-    <BrowserRouter>
+    <div className="bg-BG bg-fixed bg-cover bg-center bg-no-repeat">
       <Routes>
-        <Route path="*" element={<Unauthorized />}></Route>
-        <Route path="/" element={userData ? <Dashboard /> : <Login />}></Route>
+        <Route path="*" element={<Unauthorized />} />
+        <Route path="/" element={userData ? <Dashboard /> : <Login />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 

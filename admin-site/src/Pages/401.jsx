@@ -10,9 +10,9 @@ export const Unauthorized = () => {
         <h2 className="font-2xl pb-5 m-0 font-semibold">
           Error - Unauthorized Access
         </h2>
-        <Link to="/login">
+        <Link to="/">
           <button className="font-semibold text-white w-48 bg-blue-500 p-4 rounded-xl">
-            Go To Login Page
+            Go To Dashboard
           </button>
         </Link>
       </div>

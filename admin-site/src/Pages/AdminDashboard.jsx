@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-// import { DataContext } from "../Providers/DataContext";
 import { UserManager } from "../Components/UserManager";
 import { instance } from "../Clients";
-import { utils } from "@amir04lm26/react-modern-calendar-date-picker";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import Calendar from "react-calendar";
@@ -52,7 +50,7 @@ export const Dashboard = () => {
   }, [doc, udur]);
 
   return (
-    <div className="h-screen bg-slate-50 pt-24 p-8 flex justify-center">
+    <div className="h-fit pt-24 p-8 flex justify-center">
       <div className="w-full h-fit max-w-3xl">
         <h1 className=" font-bold text-xl">Soddent clinic admin dashboard.</h1>
         <div className="flex gap-8 pt-5">
@@ -71,7 +69,7 @@ export const Dashboard = () => {
             <p className="text-white">Ямар нэг юм </p>
           </div>
         </div>
-        <h1 className=" font-bold text-xl mt-16 text-center m-5">
+        <h1 className="font-bold text-xl mt-16 text-center m-5">
           {udur} үйлчлүүлэгчид
         </h1>
         <Dropdown
