@@ -24,7 +24,7 @@ export const Login = () => {
 
   return (
     <div className="flex flex-col p-28 justify-center items-center h-screen">
-      <div className="flex p-10 justify-center items-center gap-20 shadow-2xl   w-80 md:w-fit">
+      <div className="flex p-10 justify-center items-center gap-20 shadow-2xl bg-white rounded-xl w-80 md:w-fit">
         <div className="rounded-2xl">
           <div className="w-72 md:w-80">
             <h1 className="text-xl md:text-2xl text-center m-2 font-semibold">

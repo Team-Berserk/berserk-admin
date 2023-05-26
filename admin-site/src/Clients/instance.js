@@ -5,7 +5,7 @@ export const getAuthorizationHeader = () =>
 export const instance = axios.create({
   baseURL: 'https://soddent-api.vercel.app/',
   // baseURL: 'http://localhost:7000/',
-  timeout: 5000,
+  // timeout: 5000,
   headers: {
     authorization: getAuthorizationHeader(),
   },
