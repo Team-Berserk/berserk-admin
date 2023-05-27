@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserManager } from "../Components/UserManager";
 import { instance } from "../Clients";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import Calendar from "react-calendar";
+import {FaUserShield} from 'react-icons/fa'
+import { AuthContext } from "../Providers/AuthProvider";
 
 const options = [
   { value: "644a501b83fa5beca3d465b3", label: "Энхжин" },
@@ -18,8 +20,9 @@ export const Dashboard = () => {
   const [awagdsn, setAwagdsn] = useState(0);
   const [doc, setDoc] = useState(options[2].value);
   // const [docindex, setDocIndex] = useState(options[2].value);
-  const [udur, setDate] = useState(null);
+  const [udur, setDate] = useState(new Date().toLocaleDateString("pt-br").split("/").reverse().join("-"));
   const [calendarVisible, setVisibility] = useState(false);
+  const {userData} = useContext(AuthContext)
   const getDocsUsers = () => {
     // console.log(doc, udur);
     instance.put("manage/" + doc, { date: udur }).then((response) => {
@@ -37,9 +40,7 @@ export const Dashboard = () => {
     setDate(value.toLocaleDateString("pt-br").split("/").reverse().join("-"));
   };
   useEffect(() => {
-    setDate(
-      new Date().toLocaleDateString("pt-br").split("/").reverse().join("-")
-    );
+    
     getDocsUsers();
   }, []);
 
@@ -51,6 +52,7 @@ export const Dashboard = () => {
 
   return (
     <div className="h-fit pt-24 p-8 flex justify-center">
+      <div className="absolute top-0 flex justify-end w-full p-3 pr-6 font-bold gap-2 items-center"><FaUserShield/><h1>{userData.username}</h1></div>
       <div className="w-full h-fit max-w-3xl">
         <h1 className=" font-bold text-xl">Soddent clinic admin dashboard.</h1>
         <div className="flex gap-8 pt-5">

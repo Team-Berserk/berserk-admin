@@ -12,7 +12,7 @@ export const Unauthorized = () => {
         </h2>
         <Link to="/">
           <button className="font-semibold text-white w-48 bg-blue-500 p-4 rounded-xl">
-            Go To Dashboard
+            Login
           </button>
         </Link>
       </div>

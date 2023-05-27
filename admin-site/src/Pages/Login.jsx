@@ -6,7 +6,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { verifyToken } = useContext(AuthContext);
+  const { verifyToken ,setUserData} = useContext(AuthContext);
   const Navigator = useNavigate();
 
   const onSubmit = () => {
@@ -17,8 +17,9 @@ export const Login = () => {
       })
       .then((response) => {
         window.localStorage.setItem("token", response.data);
+        setUserData(response.data)
         verifyToken();
-        Navigator("/");
+        Navigator("/dash-main");
       });
   };
 

@@ -5,6 +5,7 @@ import { Dashboard } from "./Pages/AdminDashboard";
 import { useContext } from "react";
 import { AuthContext } from "./Providers/AuthProvider";
 import { Unauthorized } from "./Pages/401";
+import { NotFound } from "./Pages/404";
 
 function App() {
   const { userData } = useContext(AuthContext);
@@ -12,8 +13,9 @@ function App() {
   return (
     <div className="bg-BG bg-fixed bg-cover bg-center bg-no-repeat">
       <Routes>
-        <Route path="*" element={<Unauthorized />} />
-        <Route path="/" element={userData ? <Dashboard /> : <Login />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/dash-main" element={userData ? <Dashboard /> : <Unauthorized/>} />
       </Routes>
     </div>
   );
