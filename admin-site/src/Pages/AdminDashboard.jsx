@@ -12,6 +12,7 @@ const options = [
   { value: "644a502083fa5beca3d465b5", label: "Ангирмаа" },
   { value: "644a4eb0ccd779809ac1c3fe", label: "Энхбаяр" },
   { value: "644a502b83fa5beca3d465b9", label: "Баярмаа" },
+  { value: "64723e51bf5f3125c1247aba", label: "Оюунбаяр" },
 ];
 
 export const Dashboard = () => {
